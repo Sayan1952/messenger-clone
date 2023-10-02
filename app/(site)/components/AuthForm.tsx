@@ -4,7 +4,7 @@ import Input from '@/app/components/inputs/Input';
 import { useState, useCallback } from 'react';
 import { useForm, FieldValues, SubmitHandler, set } from 'react-hook-form';
 import AuthSocialButton from './AuthSocialButton';
-import { BsGithub } from 'react-icons/bs'
+import { BsGithub, BsGoogle } from 'react-icons/bs'
 
 
 type Variant = 'LOGIN' | 'REGISTER'
@@ -63,18 +63,23 @@ const AuthForm = () => {
                 <Input label='Name'
                 register={register}
                 id="name"
-                errors={errors}/>
+                errors={errors}
+                disabled={isLoading}
+                />
             )}
             <Input label='Email'
             register={register}
             id="email"
             type='email'
-            errors={errors}/>
+            errors={errors}
+            disabled={isLoading}
+/>
             <Input label='Password'
             register={register}
             id="password"
             type='password'
             errors={errors}
+            disabled={isLoading}
             />
             <div>
                 <Button
@@ -109,8 +114,34 @@ const AuthForm = () => {
             <div className='mt-6 flex gap-2'>
                 <AuthSocialButton
                  icon = {BsGithub}
+                 onClick={() => socialAction('github')}
+                ></AuthSocialButton>
+                <AuthSocialButton
+                 icon = {BsGoogle}
+                 onClick={() => socialAction('google')}
                 ></AuthSocialButton>
                 
+            </div>
+
+        </div>
+        <div className=']
+        flex
+        gap-2
+        justify-center
+        text-sm
+        mt-6
+        px-2
+        text-gray-500
+        '>
+
+            <div>
+                {variant === 'LOGIN' ? 'New to Messenger?' : 'Already have an account?'}
+            </div>
+            <div 
+                onClick={toggleVariant}
+                className='underline cursor-pointer'
+            >{variant === 'LOGIN' ? 'Create an account' : 'Log In'}
+
             </div>
 
         </div>
